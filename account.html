@@ -4,12 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Final</title>
+  <title>Account</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" type="text/css">
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.3/firebase-ui-auth.css" />
 </head>
 
+
 <body>
+  <div class="py-8 md:px-32 px-0 md:w-1/2 w-full mx-auto">
+
+    <div class="flex items-center">
+      <div class="md:mx-0 mx-4"><span class="font-bold text-2xl">Ice Breakers</span></div>
+      <div class="ml-auto text-sm sign-in-or-sign-out"></div>
+    </div>
+
+    <div class="filters md:flex justify-center space-x-2 md:space-y-0 space-y-2">
+      <div class="text-center text-xl px-4 md:py-2">Filters:</div>
+      <div class="text-center"><a href="#" id="all-filter" class="filter-button inline-block border-2 rounded px-4 py-2">Saved</a></div>
+      <div class="text-center"><a href="#" id="noober-pool-filter" class="filter-button inline-block border-2 rounded px-4 py-2">Liked</a></div>
+      <div class="text-center"><a href="#" id="noober-purple-filter" class="filter-button inline-block border-2 rounded px-4 py-2">Submitted</a></div>
+      <div class="text-center"><a href="#" id="noober-xl-filter" class="filter-button inline-block border-2 rounded px-4 py-2">Random</a></div>
+    </div>
+
+    <div class="icebreakers">
+      <!-- Posts rendered from JavaScript -->
+    </div>
+
+
+
+
   <div class="sign-in-or-sign-out"></div>
  
   <!-- Put the Firebase config here -->
@@ -21,7 +44,15 @@
 
   <script>
     // Your web app's Firebase configuration
-    var firebaseConfig = {} // replace
+    var firebaseConfig = {
+    apiKey: "AIzaSyCHs79xUOJ8Tziwzq-41bz5EPR5Srvz0_k",
+    authDomain: "kiei-451-285bc.firebaseapp.com",
+    projectId: "kiei-451-285bc",
+    storageBucket: "kiei-451-285bc.appspot.com",
+    messagingSenderId: "961860795689",
+    appId: "1:961860795689:web:dc2a014d4e01901889cb38"
+  }
+
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
