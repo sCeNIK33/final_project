@@ -3,11 +3,11 @@ let firebase = require('./firebase')
 
 function filter(icebreaker) {
   let filter
-  if (filter = XXXXXX) {           // Need logic here to identify the logged in users saved posts
+  if (iceBreakerData = XXXXXX) {           // Need logic here to identify the logged in users saved posts
     filter = 'Saved'              
-  } else if (filter = XXXXXX) {     // Need logic here to identify the logged in users submitted posts
+  } else if (iceBreakerData = XXXXXX) {     // Need logic here to identify the logged in users submitted posts
     filter = 'Submitted'
-  } else if (filter = XXXXXX) {     // Need logic here to identify the logged in users liked posts
+  } else if (iceBreakerData = XXXXXX) {     // Need logic here to identify the logged in users liked posts
     filter = 'Liked'
   } else {
     filter = 'Random'
