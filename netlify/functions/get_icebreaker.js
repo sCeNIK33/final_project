@@ -16,10 +16,10 @@ exports.handler = async function(event) {
   
   // loop through the post documents
   for (let i=0; i<icebreakers.length; i++) {
-    let icebreakerId = icebreakers[i].id                                // the ID for the given post
-    let icebreaker = icebreakers[i].data()                          // the rest of the post data
-    let likesQuery = await db.collection('likes')           // likes from Firestore
-                             .where('postId', '==', postId) // for the given postId
+    let icebreakerId = icebreakers[i].id                         
+    let icebreaker = icebreakers[i].data()                         
+    let likesQuery = await db.collection('likes')           
+                             .where('icebreakerId', '==', icebreakerId) 
                              .get()
 
  
