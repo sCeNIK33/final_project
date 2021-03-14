@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
           document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
 
           // make fetch POST request to backend to delete a completed todo
-          await fetch('/.netlify/functions/complete_icebreaker', {
+          await fetch('/.netlify/functions/used_icebreaker', {
             method: 'POST',
             body: JSON.stringify({
               icebreakerId: icebreaker.id
@@ -65,7 +65,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
 
         // make fetch POST request to backend to delete a completed todo
-        await fetch('/.netlify/functions/complete_icebreaker', {
+        await fetch('/.netlify/functions/used_icebreaker', {
           method: 'POST',
           body: JSON.stringify({
             icebreakerId: icebreaker.id
