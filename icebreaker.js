@@ -10,11 +10,11 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
       if (icebreakerText.length > 0) {
         // make fetch POST request to backend to create a new todo
-        let response = await fetch('http://localhost:8888//.netlify/functions/create_icebreaker', {
+        let response = await fetch(`http://localhost:8888/.netlify/functions/create_icebreaker`, {
           method: 'POST',
           body: JSON.stringify({
             text: icebreakerText,
-            userId: user.uid
+            // userId: user.uid
           })
         })
         let icebreaker = await response.json()
@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
           document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
 
           // make fetch POST request to backend to delete a completed todo
-          await fetch('http://localhost:8888//.netlify/functions/used_icebreaker', {
+          await fetch('http://localhost:8888/.netlify/functions/used_icebreaker', {
             method: 'POST',
             body: JSON.stringify({
               icebreakerId: icebreaker.id
@@ -44,7 +44,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
     })
 
     // Show only my to-dos
-    let response = await fetch(`http://localhost:8888//.netlify/functions/get_icebreaker?userId=${user.uid}`)
+    let response = await fetch(`http://localhost:8888/.netlify/functions/get_icebreaker?userId=${user.uid}`)
     let icebreakers = await response.json()
     console.log(icebreakers)
 
@@ -65,7 +65,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
 
         // make fetch POST request to backend to delete a completed todo
-        await fetch('http://localhost:8888//.netlify/functions/used_icebreaker', {
+        await fetch('http://localhost:8888/.netlify/functions/used_icebreaker', {
           method: 'POST',
           body: JSON.stringify({
             icebreakerId: icebreaker.id
