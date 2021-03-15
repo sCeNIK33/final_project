@@ -18,7 +18,7 @@ function filter(icebreaker) {
 function renderIceBreakers(icebreakersArray) {
   for (let i=0; i<icebreaker.length; i++) {
     let icebreakerId = icebreaker[i].id                                // the ID for the given post
-    let icebreaker = icebreaker[i].data()                          // the rest of the post data
+    let icebreakerData = icebreaker[i].data()                          // the rest of the post data
     let icebreakerLikesQuery = await db.collection('icebreakerLikes')           // likes from Firestore
                               .where('icebreakerId', '==', icebreakerId) // for the given postId
                               .get()
@@ -67,40 +67,33 @@ function renderIceBreakers(icebreakersArray) {
 
 
 exports.handler = async function(event) {
-  let queryStringUserId = event.queryStringParameters.userId
-
-let icebreakerData = []                                      
-let db = firebase.firestore()
-
-let querySnapshot = await db.collection('icebreaker')             // posts from Firestore
-                         .where('userId', "==", queryStringUserId)              // ordered by created
-                         .get()
-let icebreakers = querySnapshot.docs                               // the post documents themselves
-
-// loop through the post documents
-for (let i=0; i<icebreakers.length; i++) {
-  let icebreakerId = icebreakers[i].id                         
-  let icebreaker = icebreakers[i].data()                         
-  let likesQuery = await db.collection('likes')           
-                           .where('icebreakerId', '==', icebreakerId) 
+  let db = firebase.firestore()                             // define a variable so we can use Firestore
+  let icebreakerData = []                                        // an empty Array
+  
+  let icebreakerQuery = await db.collection('icebreakers')             // posts from Firestore
+                           .orderBy('created')              // ordered by created
                            .get()
+  let icebreaker = icebreakerQuery.docs                               // the post documents themselves
+  
+  // loop through the post documents
+  for (let i=0; i<icebreaker.length; i++) {
+    let icebreakerId = icebreaker[i].id                                // the ID for the given post
+    let icebreakerData = icebreaker[i].data()                          // the rest of the post data
+    let icebreakerLikesQuery = await db.collection('icebreakerLikes')           // likes from Firestore
+                             .where('icebreakerId', '==', icebreakerId) // for the given postId
+                             .get()
+  }
+  
 
 
 
-  // add a new Object of our own creation to the postsData Array
-  icebreakerData.push({
-    id: icebreakerId,                                           // the post ID
-    text: icebreaker.text,                          // the image URL
-    username: icebreakerData.username,                          // the username
-    likes: likesQuery.size,                               // number of likes                                // an Array of comments
-  })
-}
 
-// return an Object in the format that a Netlify lambda function expects
-return {
-  statusCode: 200,
-  body: JSON.stringify(icebreakerData)
-}
+
+  // return an Object in the format that a Netlify lambda function expects
+  return {
+    statusCode: 200,
+    body: JSON.stringify(postsData)
+  }
 }
 
 
