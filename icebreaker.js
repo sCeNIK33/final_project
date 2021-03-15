@@ -13,7 +13,8 @@ firebase.auth().onAuthStateChanged(async function(user) {
         let response = await fetch(`http://localhost:8888/.netlify/functions/create_icebreaker`, {
           method: 'POST',
           body: JSON.stringify({
-            text: icebreakerText,
+            text: icebreakerText
+            // ,
             // userId: user.uid
           })
         })
