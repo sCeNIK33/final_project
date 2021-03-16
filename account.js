@@ -20,13 +20,20 @@ firebase.auth().onAuthStateChanged(async function (user) {
             <a href="#" class="used-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">Used</a>
           </div>
         `)
+       
+        // add opacity to like button if icebreaker is already liked
+        let docRef = await db.collection('like').doc(`${icebreakerId}`).get()
+        if (docRef.data()) {
+          document.querySelector(`.movie-${icebreakerId} .w-full`).classList.add('opacity-20')
+        }
 
+        // add opacity to like button when clicked
         document.querySelector(`.icebreaker-${icebreakerId} .like-button`).addEventListener('click', async function(event) {
           event.preventDefault()
           document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
         
-            // make fetch POST request to backend to delete a used icebreaker
-          await fetch('/.netlify/functions/used_icebreaker', {
+            // make fetch POST request to backend to delete a liked icebreaker
+          await fetch('/.netlify/functions/like', {
             method: 'POST',
             body: JSON.stringify({
               icebreakerId: icebreaker.id
@@ -35,12 +42,19 @@ firebase.auth().onAuthStateChanged(async function (user) {
         })
       
 
+        // add opacity to used button if icebreaker is already used
+        let docRef = await db.collection('used_icebreaker').doc(`${icebreakerId}`).get()
+        if (docRef.data()) {
+          document.querySelector(`.movie-${icebreakerId} .w-full`).classList.add('opacity-20')
+        }
+
+        // add opacity to used button when clicked
         document.querySelector(`.icebreaker-${icebreakerId} .used-button`).addEventListener('click', async function(event) {
           event.preventDefault()
           document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
 
-          // make fetch POST request to backend to delete a liked icebreaker
-          await fetch('/.netlify/functions/like', {
+          // make fetch POST request to backend to delete a used icebreaker
+          await fetch('/.netlify/functions/used_icebreaker', {
             method: 'POST',
             body: JSON.stringify({
               icebreakerId: icebreaker.id
