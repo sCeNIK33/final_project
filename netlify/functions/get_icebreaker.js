@@ -19,7 +19,7 @@ exports.handler = async function(event) {
       let icebreakerId = icebreakers[i].id                         
       let icebreaker = icebreakers[i].data()                         
     
-      icebreakerData.push({
+      icebreakerData.get({
         id: icebreakerId,
         text: icebreaker.text
       })
