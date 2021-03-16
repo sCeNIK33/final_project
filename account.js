@@ -22,8 +22,8 @@ firebase.auth().onAuthStateChanged(async function (user) {
         `)
        
         // add opacity to like button if icebreaker is already liked
-        let docRef = await db.collection('like').doc(`${icebreakerId}`).get()
-        if (docRef.data()) {
+        let docRef1 = await db.collection('like').doc(`${icebreakerId}`).get()
+        if (docRef1.data()) {
           document.querySelector(`.movie-${icebreakerId} .w-full`).classList.add('opacity-20')
         }
 
@@ -32,7 +32,7 @@ firebase.auth().onAuthStateChanged(async function (user) {
           event.preventDefault()
           document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
         
-            // make fetch POST request to backend to delete a liked icebreaker
+          // make fetch POST request to backend to delete a liked icebreaker
           await fetch('/.netlify/functions/like', {
             method: 'POST',
             body: JSON.stringify({
@@ -43,8 +43,8 @@ firebase.auth().onAuthStateChanged(async function (user) {
       
 
         // add opacity to used button if icebreaker is already used
-        let docRef = await db.collection('used_icebreaker').doc(`${icebreakerId}`).get()
-        if (docRef.data()) {
+        let docRef2 = await db.collection('used_icebreaker').doc(`${icebreakerId}`).get()
+        if (docRef2.data()) {
           document.querySelector(`.movie-${icebreakerId} .w-full`).classList.add('opacity-20')
         }
 
