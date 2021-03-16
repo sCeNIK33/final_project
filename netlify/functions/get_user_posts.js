@@ -84,12 +84,6 @@ exports.handler = async function(event) {
                              .get()
   }
   
-
-
-
-
-
-  // return an Object in the format that a Netlify lambda function expects
   return {
     statusCode: 200,
     body: JSON.stringify(postsData)
