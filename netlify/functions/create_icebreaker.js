@@ -6,20 +6,19 @@ exports.handler = async function (event) {
   let body = JSON.parse(event.body)
   let icebreakerText= body.text
   let userId = body.userId
-  let username = body.username
 
   let newIcebreaker = {
       text: icebreakerText,
       userId: userId,
-      username: username,
-      created: firebase.firestore.FieldValue.serverTimestamp()
+      // username: username,
+      // created: firebase.firestore.FieldValue.serverTimestamp()
   }
 
 //   newIcebreaker.timestamp = firebase.firestore.FieldValue.serverTimestamp()
 
   let docRef = await db.collection('icebreaker').add(newIcebreaker)
   console.log(`new icebreaker with ID ${docRef.id} created`)
-  newIcebreaker.id = docRef.
+  newIcebreaker.id = docRef.id
   newIcebreaker.likes = 0
 
   return {
