@@ -22,16 +22,20 @@ exports.handler = async function(event) {
                              .where('icebreakerId', '==', icebreakerId) 
                              .get()
 
- 
-
-    // add a new Object of our own creation to the postsData Array
     icebreakerData.push({
-      id: icebreakerId,                                           // the post ID
-      text: icebreaker.text,                          // the image URL
-      username: icebreakerData.username,                          // the username
-      likes: likesQuery.size,                               // number of likes                                // an Array of comments
+      id: icebreakerId,
+      text: icebreaker.text
     })
   }
+
+    // add a new Object of our own creation to the postsData Array
+  //   icebreakerData.push({
+  //     id: icebreakerId,                                           // the post ID
+  //     text: icebreaker.text,                          // the image URL
+  //     username: icebreakerData.username,                          // the username
+  //     likes: likesQuery.size,                               // number of likes                                // an Array of comments
+  //   })
+  // }
   
   // return an Object in the format that a Netlify lambda function expects
   return {
