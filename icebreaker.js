@@ -3,6 +3,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
     // Signed in
     console.log('signed in')
 
+     // Ensure the signed-in user is in the users collection
+     db.collection('users').doc(user.uid).set({
+      name: user.displayName,
+      email: user.email
+    })
+
     document.querySelector('.sign-in-or-sign-out').innerHTML = `
       <button class="text-pink-500 underline sign-out">Sign Out</button>
     `
