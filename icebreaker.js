@@ -52,6 +52,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.querySelector(`.icebreaker-${icebreaker.id} .like-button`).addEventListener('click', async function(event) {
           event.preventDefault()
           document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
+          // await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).set({})
           
           let currentUserId = firebase.auth().currentUser.uid
 
@@ -99,6 +100,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       document.querySelector(`.icebreaker-${icebreakerId} .like-button`).addEventListener('click', async function(event) {
         event.preventDefault()
         document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
+        // await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).set({})
         let currentUserId = firebase.auth().currentUser.uid
 
         let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
