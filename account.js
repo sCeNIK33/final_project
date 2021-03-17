@@ -13,13 +13,13 @@ firebase.auth().onAuthStateChanged(async function (user) {
       document.location.href = 'account.html'
     })
 
-    let db = firebase.firestore()
-       // Ensure the signed-in user is in the users collection
-       db.collection('likes').doc(user.uid).get({
-      })
+    // let db = firebase.firestore()
+    //    // Ensure the signed-in user is in the users collection
+    //    db.collection('likes').doc(user.uid).get({
+    //   })
    
-    let response1 = await fetch(`/.netlify/functions/like?userId=${user.uid}`)
-    let likes = await response1.json()
+    let response = await fetch(`/.netlify/functions/like?userId=${user.uid}`)
+    let likes = await response.json()
     console.log(likes)
 
     for (let i=0; i<likes.length; i++) {

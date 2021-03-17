@@ -22,8 +22,6 @@ exports.handler = async function(event) {
     })
   }
 
-  // console.log(icebreakerId)
-
   return {
     statusCode: 200,
     body: JSON.stringify(likesData)
