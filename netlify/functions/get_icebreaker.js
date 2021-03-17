@@ -2,22 +2,30 @@
 let firebase = require('./firebase')
 
 
-//do we need to make this an if statement so user id pulls theirs but if not a user then pulls everything?
 exports.handler = async function(event) {
     let queryStringUserId = event.queryStringParameters.userId
 
-  let icebreakerData = []                                      
+  let icebreakerData = []                                    
   let db = firebase.firestore()
+  
+
+  
 
   let querySnapshot = await db.collection('icebreaker').get()             // posts from Firestore
-                          //  .where('userId', "==", queryStringUserId)              // ordered by created
+                          //  .where('userId', "==", queryStringUserId)     
                           //  .get()
   let icebreakers = querySnapshot.docs                               // the post documents themselves
   
-  // loop through the post documents
+  // loop through the icebreaker documents
   for (let i=0; i<icebreakers.length; i++) {
     let icebreakerId = icebreakers[i].id                         
     let icebreaker = icebreakers[i].data()
+    // let liked = await db.collection(`likes`).get()
+    //   let opacityClass = ''
+    //   if (liked) {
+    // //     opacityClass = 'opacity-20'
+    //   }               
+    
     // let likeDocRef = await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).get()
     //   let liked = likeDocRef.data()
     //   let opacityClass = ''
