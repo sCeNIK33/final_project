@@ -27,9 +27,8 @@ exports.handler = async function(event) {
     // add a new Object of our own creation to the postsData Array
     icebreakerData.push({
       id: icebreakerId,                                           // the post ID
-      text: icebreaker.text,                          // the image URL
-      username: icebreakerData.username,                          // the username
-      likes: likesQuery.size,                               // number of likes                                // an Array of comments
+      text: icebreaker.text,                          
+      likes: likesQuery,                               // number of likes                                // an Array of comments
     })
   }
   

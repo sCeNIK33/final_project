@@ -41,7 +41,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
           <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
           <div>  
-          <a href="#" class="p-2 text-sm">*</a>
+          <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Like</a>
             ${icebreakerText}
             </div>
           
@@ -49,18 +49,30 @@ firebase.auth().onAuthStateChanged(async function(user) {
           
         `)
 
-        // document.querySelector(`.icebreaker-${icebreaker.id} .done`).addEventListener('click', async function(event) {
-        //   event.preventDefault()
-        //   document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
+        document.querySelector(`.icebreaker-${icebreaker.id} .like-button`).addEventListener('click', async function(event) {
+          event.preventDefault()
+          document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
+          
+          let currentUserId = firebase.auth().currentUser.uid
 
-        //   // make fetch POST request to backend to delete a completed todo
-        //   await fetch('http://localhost:8888/.netlify/functions/used_icebreaker', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //       icebreakerId: icebreaker.id
-        //     })
-        //   })
-        // })
+          let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
+                          .where(`userId`,`==`, currentUserId).get()
+          if (querySnapshot.size ==0) {
+            await db.collection(`likes`).add({
+              icebreakerId: icebreakerId,
+              userId: currentUserId
+            })
+          }
+          
+
+          // make fetch POST request to backend to delete a unliked icebreaker
+          // await fetch('/.netlify/functions/used_icebreaker', {
+          //   method: 'POST',
+          //   body: JSON.stringify({
+          //     icebreakerId: icebreaker.id
+          //   })
+          // })
+        })
 
         document.querySelector('#icebreaker').value = ''
       }
@@ -75,26 +87,39 @@ firebase.auth().onAuthStateChanged(async function(user) {
       let icebreaker = icebreakers[i]
       let icebreakerId = icebreaker.id
       let icebreakerText = icebreaker.text
+      
 
       document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
         <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
-          <a href="#" class="p-2 text-sm">*</a>
+          <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Like</a>
           ${icebreakerText}
         </div>
       `)
 
-      // document.querySelector(`.icebreaker-${icebreakerId} .done`).addEventListener('click', async function(event) {
-      //   event.preventDefault()
-      //   document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
+      document.querySelector(`.icebreaker-${icebreakerId} .like-button`).addEventListener('click', async function(event) {
+        event.preventDefault()
+        document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
+        let currentUserId = firebase.auth().currentUser.uid
 
-      //   // make fetch POST request to backend to delete a completed todo
-      //   await fetch('http://localhost:8888/.netlify/functions/used_icebreaker', {
-      //     method: 'POST',
-      //     body: JSON.stringify({
-      //       icebreakerId: icebreaker.id
-      //     })
-      //   })
-      // })
+        let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
+                        .where(`userId`,`==`, currentUserId).get()
+        if (querySnapshot.size ==0) {
+          await db.collection(`likes`).add({
+            icebreakerId: icebreakerId,
+            userId: currentUserId
+          })
+          
+        }
+
+
+        // make fetch POST request to backend to delete a completed todo
+        // await fetch('/.netlify/functions/used_icebreaker', {
+        //   method: 'POST',
+        //   body: JSON.stringify({
+        //     icebreakerId: icebreaker.id
+        //   })
+        // })
+      })
     }
     
 
@@ -106,6 +131,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
   
     console.log('signed out')
     document.querySelector('form').classList.add('hidden')
+
+
+    document.querySelector('.image').insertAdjacentHTML('afterend', `
+    <div>
+      <p class= "text-center text-4xl text-red-500"> Please join our community to take part in our fantastic icebreakers! Please sign in or create an account above!
+    </p>
+      </div>`)
 
     // Initializes FirebaseUI Auth
     let ui = new firebaseui.auth.AuthUI(firebase.auth())

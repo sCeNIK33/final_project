@@ -82,6 +82,12 @@ firebase.auth().onAuthStateChanged(async function (user) {
     } else {
       // Signed out
       console.log('signed out')
+
+    document.querySelector('.liked').insertAdjacentHTML('afterend', `
+    <div>
+      <p class= "text-center text-4xl text-red-500"> Please join our community to take part in our fantastic icebreakers! Please sign in or create an account above!
+    </p>
+      </div>`)
   
       // Initializes FirebaseUI Auth
       let ui = new firebaseui.auth.AuthUI(firebase.auth())
