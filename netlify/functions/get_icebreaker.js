@@ -15,7 +15,8 @@ exports.handler = async function(event) {
                           //  .where('userId', "==", queryStringUserId)     
                           //  .get()
   let icebreakers = querySnapshot.docs                               // the post documents themselves
-  
+     
+
   // loop through the icebreaker documents
   for (let i=0; i<icebreakers.length; i++) {
     let icebreakerId = icebreakers[i].id                         
