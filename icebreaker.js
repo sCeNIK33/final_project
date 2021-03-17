@@ -13,6 +13,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
       document.location.href = 'index.html'
     })
 
+    document.querySelector('.image').insertAdjacentHTML('afterend', `
+    <div>
+      <p class= "text-center text-2xl text-blue-500"> Like your favorite icebreakers below and then visit your account page to see your list!
+    </p>
+      </div>`)
+
       let db = firebase.firestore()
        // Ensure the signed-in user is in the users collection, received permission to use db for new user creation in FS
        db.collection('users').doc(user.uid).set({
