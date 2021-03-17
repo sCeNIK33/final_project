@@ -1,3 +1,5 @@
+
+
 firebase.auth().onAuthStateChanged(async function(user) {
   if (user) {
     // Signed in
@@ -13,12 +15,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
       document.location.href = 'index.html'
     })
 
-    // let db = firebase.firestore()
-    //   //  // Ensure the signed-in user is in the users collection
-    //    db.collection('users').doc(user.uid).set({
-    //     name: user.displayName,
-    //     email: user.email
-    //   })
+      let db = firebase.firestore()
+       // Ensure the signed-in user is in the users collection
+       db.collection('users').doc(user.uid).set({
+        name: user.displayName,
+        email: user.email
+      })
       
     document.querySelector('form').addEventListener('submit', async function(event) {
       event.preventDefault()
