@@ -33,12 +33,6 @@ firebase.auth().onAuthStateChanged(async function (user) {
           ${icebreakerText}
         </div>
       `)
-      
-      // add opacity to like button if icebreaker is already liked
-      // let docRef = await db.collection('likes').doc(`${likeId}`).get()
-      // if (docRef.data()) {
-      //   document.querySelector(`.icebreaker-${likeId} .w-full`).classList.add('opacity-20')
-      // }
 
       // add opacity to like button when clicked
       document.querySelector(`.icebreaker-${likeId} .like-button`).addEventListener('click', async function(event) {
@@ -49,12 +43,11 @@ firebase.auth().onAuthStateChanged(async function (user) {
         await fetch('/.netlify/functions/removeLike', {
           method: 'POST',
           body: JSON.stringify({
-            likeId: likes.id
+            likeId: like.id
           })
         })  
       })
     }
-
 
 
   } else {
