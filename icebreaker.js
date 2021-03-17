@@ -61,7 +61,8 @@ firebase.auth().onAuthStateChanged(async function(user) {
           if (querySnapshot.size ==0) {
             await db.collection(`likes`).add({
               icebreakerId: icebreakerId,
-              userId: currentUserId
+              userId: currentUserId,
+              text: icebreakerText
             })
           }
           
@@ -108,7 +109,8 @@ firebase.auth().onAuthStateChanged(async function(user) {
         if (querySnapshot.size ==0) {
           await db.collection(`likes`).add({
             icebreakerId: icebreakerId,
-            userId: currentUserId
+            userId: currentUserId,
+            text: icebreakerText
           })
           
         }
