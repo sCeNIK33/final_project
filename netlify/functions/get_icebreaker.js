@@ -17,7 +17,13 @@ exports.handler = async function(event) {
   // loop through the post documents
   for (let i=0; i<icebreakers.length; i++) {
     let icebreakerId = icebreakers[i].id                         
-    let icebreaker = icebreakers[i].data()                         
+    let icebreaker = icebreakers[i].data()
+    // let likeDocRef = await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).get()
+    //   let liked = likeDocRef.data()
+    //   let opacityClass = ''
+    //   if (liked) {
+    //     opacityClass = 'opacity-20'
+    //   }                         
     // let likesQuery = await db.collection('likes')           
     //                          .where('icebreakerId', '==', icebreakerId) 
     //                          .get()
