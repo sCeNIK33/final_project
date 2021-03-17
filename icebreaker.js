@@ -55,7 +55,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
           </div>
           
         `)
-        
+        document.querySelector('#icebreaker').value = ''
 
         document.querySelector(`.icebreaker-${icebreaker.id} .like-button`).addEventListener('click', async function(event) {
           event.preventDefault()
@@ -89,7 +89,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
           //   })
           // })
 
-        document.querySelector('#icebreaker').value = ''
+        // document.querySelector('#icebreaker').value = ''
       }
     })
  
