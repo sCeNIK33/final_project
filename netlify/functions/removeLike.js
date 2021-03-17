@@ -7,7 +7,7 @@ exports.handler = async function(event) {
   let body = JSON.parse(event.body)
   let icebreakerId = body.icebreakerId
 
-  await db.collection('todos').doc(icebreakerId).delete()
+  await db.collection('likes').doc(icebreakerId).delete()
   console.log(`deleted icebreaker with ID ${icebreakerId}`)
 
   return {
