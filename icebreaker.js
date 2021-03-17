@@ -48,6 +48,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
           </div>
           
         `)
+        
 
         document.querySelector(`.icebreaker-${icebreaker.id} .like-button`).addEventListener('click', async function(event) {
           event.preventDefault()
@@ -97,6 +98,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
           ${icebreakerText}
         </div>
       `)
+
+      let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
+                        .where(`userId`,`==`, user.uid).get()
+      if (querySnapshot.size ==1) {
+      document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
+      }
+
 
       document.querySelector(`.icebreaker-${icebreakerId} .like-button`).addEventListener('click', async function(event) {
         event.preventDefault()
