@@ -13,11 +13,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
       document.location.href = 'index.html'
     })
 
-      //  // Ensure the signed-in user is in the users collection
-      //  db.collection('users').doc(user.uid).set({
-      //   name: user.displayName,
-      //   email: user.email
-      // })
+    // let db = firebase.firestore()
+    //   //  // Ensure the signed-in user is in the users collection
+    //    db.collection('users').doc(user.uid).set({
+    //     name: user.displayName,
+    //     email: user.email
+    //   })
       
     document.querySelector('form').addEventListener('submit', async function(event) {
       event.preventDefault()
@@ -39,7 +40,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
           <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
-            <a href="#" class="p-2 text-sm">✓</a>
+            <a href="#" class="p-2 text-sm">*</a>
             ${icebreakerText}
           </div>
         `)
@@ -73,7 +74,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
       document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
         <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
-          <a href="#" class="p-2 text-sm">✓</a>
+          <a href="#" class="p-2 text-sm">*</a>
           ${icebreakerText}
         </div>
       `)
