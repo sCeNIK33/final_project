@@ -5,10 +5,10 @@ exports.handler = async function(event) {
   let db = firebase.firestore()
 
   let body = JSON.parse(event.body)
-  let icebreakerId = body.icebreakerId
+  let likesId = body.likesId
 
-  await db.collection('likes').doc(icebreakerId).delete()
-  console.log(`deleted icebreaker with ID ${icebreakerId}`)
+  await db.collection('likes').doc(likesId).delete()
+  console.log(`deleted like with ID ${likesId}`)
 
   return {
     statusCode: 200,

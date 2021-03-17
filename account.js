@@ -17,40 +17,43 @@ firebase.auth().onAuthStateChanged(async function (user) {
        // Ensure the signed-in user is in the users collection
        db.collection('likes').doc(user.uid).get({
       })
-
    
-    let response = await fetch(`/.netlify/functions/like?userId=${user.uid}`)
-    let icebreakers = await response.json()
-    console.log(icebreakers)
+    let response1 = await fetch(`/.netlify/functions/like?userId=${user.uid}`)
+    let response2 = await fetch(`/.netlify/functions/get_icebreaker?userId=${user.uid}`)
+    let likes = await response1.json()
+    let icebreaker = await response2.json()
+    console.log(likes)
+    console.log(icebreaker)
 
-    for (let i=0; i<icebreakers.length; i++) {
-      let icebreaker = icebreakers[i]
-      let icebreakerId = icebreaker.id
+    for (let i=0; i<likes.length; i++) {
+      let like = likes[i]
+      let likeId = like.id
       let icebreakerText = icebreaker.text
+      // let icebreakerText = icebreaker.text
 
       document.querySelector('.icebreaker').insertAdjacentHTML('afterend', `
-        <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
+        <div class="icebreaker-${likeId} py-4 text-xl border-b-2 border-purple-500 w-full">
           <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Remove</a>
           ${icebreakerText}
         </div>
       `)
       
       // add opacity to like button if icebreaker is already liked
-      let docRef = await db.collection('likes').doc(`${icebreakerId}`).get()
+      let docRef = await db.collection('likes').doc(`${likeId}`).get()
       if (docRef.data()) {
-        document.querySelector(`.icebreaker-${icebreakerId} .w-full`).classList.add('opacity-20')
+        document.querySelector(`.icebreaker-${likeId} .w-full`).classList.add('opacity-20')
       }
 
       // add opacity to like button when clicked
-      document.querySelector(`.icebreaker-${icebreakerId} .like-button`).addEventListener('click', async function(event) {
+      document.querySelector(`.icebreaker-${likeId} .like-button`).addEventListener('click', async function(event) {
         event.preventDefault()
-        document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
+        document.querySelector(`.icebreaker-${likeId}`).classList.add('opacity-20')
       
         // make fetch POST request to backend to delete a liked icebreaker
         await fetch('/.netlify/functions/removeLike', {
           method: 'POST',
           body: JSON.stringify({
-            icebreakerId: icebreaker.id
+            likeId: likes.id
           })
         })  
       })
