@@ -17,9 +17,8 @@ exports.handler = async function(event) {
     let like = likes[i].data()
 
     likesData.push({
-      icebreakerId: likes.icebreakerId
-      // id: likeId,
-      // text: like.text
+      id: likeId,
+      text: like.text
     })
   }
 

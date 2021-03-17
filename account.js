@@ -19,17 +19,13 @@ firebase.auth().onAuthStateChanged(async function (user) {
       })
    
     let response1 = await fetch(`/.netlify/functions/like?userId=${user.uid}`)
-    let response2 = await fetch(`/.netlify/functions/get_icebreaker?userId=${user.uid}`)
     let likes = await response1.json()
-    let icebreaker = await response2.json()
     console.log(likes)
-    console.log(icebreaker)
 
     for (let i=0; i<likes.length; i++) {
       let like = likes[i]
       let likeId = like.id
-      let icebreakerText = icebreaker.text
-      // let icebreakerText = icebreaker.text
+      let icebreakerText = like.text
 
       document.querySelector('.icebreaker').insertAdjacentHTML('afterend', `
         <div class="icebreaker-${likeId} py-4 text-xl border-b-2 border-purple-500 w-full">
@@ -39,10 +35,10 @@ firebase.auth().onAuthStateChanged(async function (user) {
       `)
       
       // add opacity to like button if icebreaker is already liked
-      let docRef = await db.collection('likes').doc(`${likeId}`).get()
-      if (docRef.data()) {
-        document.querySelector(`.icebreaker-${likeId} .w-full`).classList.add('opacity-20')
-      }
+      // let docRef = await db.collection('likes').doc(`${likeId}`).get()
+      // if (docRef.data()) {
+      //   document.querySelector(`.icebreaker-${likeId} .w-full`).classList.add('opacity-20')
+      // }
 
       // add opacity to like button when clicked
       document.querySelector(`.icebreaker-${likeId} .like-button`).addEventListener('click', async function(event) {
