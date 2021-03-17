@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(async function (user) {
         // add opacity to like button if icebreaker is already liked
         let docRef1 = await db.collection('like').doc(`${icebreakerId}`).get()
         if (docRef1.data()) {
-          document.querySelector(`.movie-${icebreakerId} .w-full`).classList.add('opacity-20')
+          document.querySelector(`.icebreaker-${icebreakerId} .w-full`).classList.add('opacity-20')
         }
 
         // add opacity to like button when clicked
@@ -44,7 +44,7 @@ firebase.auth().onAuthStateChanged(async function (user) {
         // add opacity to used button if icebreaker is already used
         let docRef2 = await db.collection('used_icebreaker').doc(`${icebreakerId}`).get()
         if (docRef2.data()) {
-          document.querySelector(`.movie-${icebreakerId} .w-full`).classList.add('opacity-20')
+          document.querySelector(`.icebreaker-${icebreakerId} .w-full`).classList.add('opacity-20')
         }
 
         // add opacity to used button when clicked
