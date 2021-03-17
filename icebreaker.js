@@ -14,12 +14,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
     })
 
       let db = firebase.firestore()
-       // Ensure the signed-in user is in the users collection
+       // Ensure the signed-in user is in the users collection, received permission to use db for new user creation in FS
        db.collection('users').doc(user.uid).set({
         name: user.displayName,
         email: user.email
       })
-      
+      // end users with db
+
     document.querySelector('form').addEventListener('submit', async function(event) {
       event.preventDefault()
 
@@ -53,20 +54,26 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.querySelector(`.icebreaker-${icebreaker.id} .like-button`).addEventListener('click', async function(event) {
           event.preventDefault()
           document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
-          await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).set({})
+          await fetch(`/.netlify/functions/create_like`, {
+            method: `POST`,
+            body: JSON.stringify(newLike)
+          })
           
-          let currentUserId = firebase.auth().currentUser.uid
+          
+          // await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).set({})
+          
+          // let currentUserId = firebase.auth().currentUser.uid
 
-          let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
-                          .where(`userId`,`==`, currentUserId).get()
-          if (querySnapshot.size ==0) {
-            await db.collection(`likes`).add({
-              icebreakerId: icebreakerId,
-              userId: currentUserId,
-              text: icebreakerText
-            })
-          }
-          
+          // let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
+          //                 .where(`userId`,`==`, currentUserId).get()
+          // if (querySnapshot.size ==0) {
+          //   await db.collection(`likes`).add({
+          //     icebreakerId: icebreakerId,
+          //     userId: currentUserId,
+          //     text: icebreakerText
+          //   })
+          // }
+        })
 
           // make fetch POST request to backend to delete a unliked icebreaker
           // await fetch('/.netlify/functions/used_icebreaker', {
@@ -75,7 +82,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
           //     icebreakerId: icebreaker.id
           //   })
           // })
-        })
 
         document.querySelector('#icebreaker').value = ''
       }
@@ -99,6 +105,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         </div>
       `)
 
+      
       let querySnapshot = await db.collection(`likes`).where(`icebreakerId`,`==`,icebreakerId)
                         .where(`userId`,`==`, user.uid).get()
       if (querySnapshot.size ==1) {
