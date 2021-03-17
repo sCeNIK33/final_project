@@ -14,19 +14,12 @@ firebase.auth().onAuthStateChanged(async function (user) {
         let icebreakerId = icebreaker.id
         let icebreakerText = icebreaker.text
 
-        document.querySelector('.icebreaker').insertAdjacentHTML('beforeend', `
+        document.querySelector('.icebreaker').insertAdjacentHTML('afterend', `
           <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
+            <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Remove</a>
             ${icebreakerText}
-            <a href="#" class="like-button block text-center text-white bg-green-500 mt-4 px-4 py-2 rounded">Liked</a>
           </div>
         `)
-
-        // document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
-        //   <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
-        //     <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Like</a>
-        //     ${icebreakerText}
-        //   </div>
-        // `)
        
         // add opacity to like button if icebreaker is already liked
         let docRef1 = await db.collection('like').doc(`${icebreakerId}`).get()
