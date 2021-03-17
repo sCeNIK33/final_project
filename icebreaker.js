@@ -114,7 +114,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
         }
 
 
-        // make fetch POST request to backend to delete a completed todo
+        // make fetch POST request to backend to delete a completed icebreaker
         // await fetch('/.netlify/functions/used_icebreaker', {
         //   method: 'POST',
         //   body: JSON.stringify({
