@@ -40,9 +40,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
           <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
-            <a href="#" class="p-2 text-sm">*</a>
+          <div>  
+          <a href="#" class="p-2 text-sm">*</a>
             ${icebreakerText}
+            </div>
+          
           </div>
+          
         `)
 
         // document.querySelector(`.icebreaker-${icebreaker.id} .done`).addEventListener('click', async function(event) {
