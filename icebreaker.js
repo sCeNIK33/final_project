@@ -78,7 +78,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       }
     })
  
-    // Show only my to-dos
+    // Show icebreakers
     let response = await fetch(`/.netlify/functions/get_icebreaker?userId=${user.uid}`)
     let icebreakers = await response.json()
     console.log(icebreakers)

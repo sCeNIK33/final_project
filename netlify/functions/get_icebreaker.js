@@ -9,18 +9,18 @@ exports.handler = async function(event) {
   let icebreakerData = []                                      
   let db = firebase.firestore()
 
-  let querySnapshot = await db.collection('icebreaker')             // posts from Firestore
-                           .where('userId', "==", queryStringUserId)              // ordered by created
-                           .get()
+  let querySnapshot = await db.collection('icebreaker').get()             // posts from Firestore
+                          //  .where('userId', "==", queryStringUserId)              // ordered by created
+                          //  .get()
   let icebreakers = querySnapshot.docs                               // the post documents themselves
   
   // loop through the post documents
   for (let i=0; i<icebreakers.length; i++) {
     let icebreakerId = icebreakers[i].id                         
     let icebreaker = icebreakers[i].data()                         
-    let likesQuery = await db.collection('likes')           
-                             .where('icebreakerId', '==', icebreakerId) 
-                             .get()
+    // let likesQuery = await db.collection('likes')           
+    //                          .where('icebreakerId', '==', icebreakerId) 
+    //                          .get()
 
  
 
@@ -28,7 +28,7 @@ exports.handler = async function(event) {
     icebreakerData.push({
       id: icebreakerId,                                           // the post ID
       text: icebreaker.text,                          
-      likes: likesQuery,                               // number of likes                                // an Array of comments
+      // likes: likesQuery                               // number of likes                                // an Array of comments
     })
   }
   
