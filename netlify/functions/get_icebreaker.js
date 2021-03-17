@@ -15,15 +15,17 @@ exports.handler = async function(event) {
                           //  .where('userId', "==", queryStringUserId)     
                           //  .get()
   let icebreakers = querySnapshot.docs                               // the post documents themselves
-  
+     
+
   // loop through the icebreaker documents
   for (let i=0; i<icebreakers.length; i++) {
     let icebreakerId = icebreakers[i].id                         
     let icebreaker = icebreakers[i].data()
-    // let liked = await db.collection(`likes`).get()
+    console.log(icebreaker)
+    // let liked = await db.collection(`likes`).doc(`${icebreakerId}-${user.uid}`).get()
     //   let opacityClass = ''
     //   if (liked) {
-    // //     opacityClass = 'opacity-20'
+    //     opacityClass = 'opacity-20'
     //   }               
     
     // let likeDocRef = await db.collection('likes').doc(`${icebreakerId}-${user.uid}`).get()
