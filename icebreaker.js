@@ -3,6 +3,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
     // Signed in
     console.log('signed in')
 
+
     document.querySelector('.sign-in-or-sign-out').innerHTML = `
       <button class="text-pink-500 underline sign-out">Sign Out</button>
     `
@@ -11,6 +12,13 @@ firebase.auth().onAuthStateChanged(async function(user) {
       firebase.auth().signOut()
       document.location.href = 'index.html'
     })
+
+      //  // Ensure the signed-in user is in the users collection
+      //  db.collection('users').doc(user.uid).set({
+      //   name: user.displayName,
+      //   email: user.email
+      // })
+      
     document.querySelector('form').addEventListener('submit', async function(event) {
       event.preventDefault()
 
@@ -19,7 +27,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
       if (icebreakerText.length > 0) {
         // make fetch POST request to backend to create a new icebreaker
-        let response = await fetch(`http://localhost:8888/.netlify/functions/create_icebreaker`, {
+        let response = await fetch(`/.netlify/functions/create_icebreaker`, {
           method: 'POST',
           body: JSON.stringify({
             text: icebreakerText,
@@ -54,7 +62,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
     })
  
     // Show only my to-dos
-    let response = await fetch(`http://localhost:8888/.netlify/functions/get_icebreaker?userId=${user.uid}`)
+    let response = await fetch(`/.netlify/functions/get_icebreaker?userId=${user.uid}`)
     let icebreakers = await response.json()
     console.log(icebreakers)
 
