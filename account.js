@@ -15,9 +15,7 @@ firebase.auth().onAuthStateChanged(async function (user) {
 
     let db = firebase.firestore()
        // Ensure the signed-in user is in the users collection
-       db.collection('likes').doc(user.uid).set({
-        name: user.displayName,
-        email: user.email
+       db.collection('likes').doc(user.uid).get({
       })
 
    
