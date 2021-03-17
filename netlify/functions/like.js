@@ -2,28 +2,32 @@
 let firebase = require('./firebase')
 
 exports.handler = async function(event) {
+  let queryStringUserId = event.queryStringParameters.userId
+
+  let likesData = []
   let db = firebase.firestore()
-  let body = JSON.parse(event.body)
-  let icebreakerId = body.icebreakerId
-  let userId = body.userId
-  
-  console.log(`post: ${icebreakerId}`)
-  console.log(`user: ${userId}`)
-
   let querySnapshot = await db.collection('likes')
-                              .where('postId', '==', postId)
-                              .where('userId', '==', userId)
+                              .where('userId', '==', queryStringUserId)
                               .get()
-  let numberOfLikes = querySnapshot.size
 
-  if (numberOfLikes == 0) {
-    await db.collection('likes').add({
-      icebreakerId: icebreakerId,
-      userId: userId
+  let likes = querySnapshot.docs
+
+  for (let i = 0; i < likes.length; i++) {
+    let likeId = likes[i].id
+    let like = likes[i].data()
+
+    likesData.push({
+      icebreakerId: likes.icebreakerId
+      // id: likeId,
+      // text: like.text
     })
-    return { statusCode: 200 }
-  } else {
-    return { statusCode: 403 }
   }
 
+  // console.log(icebreakerId)
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(likesData)
+  }
 }
+
