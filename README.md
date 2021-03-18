@@ -5,7 +5,7 @@ KIEI-451 Winter 2021
 <br>
 <div> 
           <a href= "https://kelloggicebreakers.netlify.app/"
-             <p> kelloggicebreakers.netlify.app </p>
+             <p> https://kelloggicebreakers.netlify.app/ </p>
              </a>
 
 <p>This is our team code for the <b>final project</b>. We selected <i>Project #12</i>. This project involves building an ice-breaker question generator to help people get past small-talk during Zoom calls. Users will be able to log in, browse our questions (that are stored), and save the ones they like best to their profile. <p>
