@@ -4,7 +4,7 @@ KIEI-451 Winter 2021
 
 <br>
 <div> 
-          <a href= "kelloggicebreakers.netlify.app"
+          <a href= "https://kelloggicebreakers.netlify.app/"
              <p> kelloggicebreakers.netlify.app </p>
              </a>
 
