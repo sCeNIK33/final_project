@@ -47,9 +47,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         document.querySelector('.icebreakers').insertAdjacentHTML('afterend', `
           <div class="icebreaker-${icebreakerId} py-4 text-xl border-b-2 border-purple-500 w-full">
-          <div>  
-          <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Like</a>
-            ${icebreakerText}
+            <div>  
+             <a href="#" class="like-button bg-purple-500 p-2 text-sm text-white font-bold">Like</a>
+             ${icebreakerText}
             </div>
           
           </div>
@@ -57,9 +57,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
         `)
         document.querySelector('#icebreaker').value = ''
 
-        document.querySelector(`.icebreaker-${icebreaker.id} .like-button`).addEventListener('click', async function(event) {
+        document.querySelector(`.icebreaker-${icebreakerId} .like-button`).addEventListener('click', async function(event) {
           event.preventDefault()
-          document.querySelector(`.icebreaker-${icebreaker.id}`).classList.add('opacity-20')
+          document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
           await fetch(`/.netlify/functions/create_like`, {
             method: `POST`,
             body: JSON.stringify(newLike)
