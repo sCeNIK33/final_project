@@ -107,6 +107,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
     let likeId = like.id
     let icebreakerId = icebreaker.id
 
+    // let icebreakerText = icebreaker.text
+    // let opacityClass = ''
+    // if (likes == 1){
+    //   opacityClass='opacity-20'
+    // }
+
     // add opacity to like button when page is loaded
     // if (likesData.data()) {
     // document.querySelector(`.icebreaker-${icebreakerId}`).classList.add('opacity-20')
