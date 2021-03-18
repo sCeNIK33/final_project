@@ -21,7 +21,7 @@ exports.handler = async function(event) {
   for (let i=0; i<icebreakers.length; i++) {
     let icebreakerId = icebreakers[i].id                         
     let icebreaker = icebreakers[i].data()
-    console.log(icebreaker)
+    // console.log(icebreaker)
     // let liked = await db.collection(`likes`).doc(`${icebreakerId}-${user.uid}`).get()
     //   let opacityClass = ''
     //   if (liked) {
