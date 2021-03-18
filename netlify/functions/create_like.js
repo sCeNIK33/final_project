@@ -17,7 +17,7 @@ exports.handler = async function (event) {
 console.log('create like')
 console.log(newLike)
 
-  let docRef = await db.collection('likes').add(newLike)
+  let docRef = await db.collection('likes').doc(`${icebreakerId}-${userId}`).set(newLike)
 
   newLike.id = docRef.id
 
